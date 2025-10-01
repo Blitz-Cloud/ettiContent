@@ -2,7 +2,7 @@
 title: tema4
 date: 2025-03-09T02:00:00+02:00
 subject: pclp2
-description: "Codul ilustrează stocarea și gestionarea contactelor într-o agendă telefonică. Utilizează tablouri pentru nume, prenume și telefon, bucle iterative pentru introducerea/afișarea datelor, și validarea intrărilor, respectând o capacitate maximă."
+description: 'Codul ilustrează stocarea și gestionarea contactelor într-o agendă telefonică. Utilizează tablouri pentru nume, prenume și telefon, bucle iterative pentru introducerea/afișarea datelor, și validarea intrărilor, respectând o capacitate maximă.'
 tags: []
 uniYearAndSemester: 12
 ---
