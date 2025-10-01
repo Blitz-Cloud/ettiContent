@@ -1,6 +1,0 @@
-cmake_minimum_required(VERSION 3.29)
-project(Arduino_blink_in_functie_daca_numarul_este_prim_sau_nu)
-
-set(CMAKE_CXX_STANDARD 20)
-
-add_executable(Arduino_blink_in_functie_daca_numarul_este_prim_sau_nu main.cpp)
