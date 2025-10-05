@@ -1,7 +1,7 @@
 ---
-title: modulo3
+title: 'modulo3'
 date: 2024-10-28T02:00:00+02:00
-subject: pclp1
+subject: 'pclp1'
 description: 'Codul prezintă structura de bază C: funcția `main` ca punct de intrare, includerea `stdio.h` pentru I/O standard și `printf` pentru afișarea textului. `return 0` indică succes.'
 tags: []
 uniYearAndSemester: 11

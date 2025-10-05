@@ -1,3 +1,5 @@
+
+```c
 #include <iostream>
 
 using namespace std;
@@ -32,4 +34,4 @@ int main()
   } while (opt != 'n');
   return 0;
 }
-`
+```

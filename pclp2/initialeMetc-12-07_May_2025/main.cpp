@@ -1,3 +1,5 @@
+
+```c
 #include <iostream>
 #include <cstring>
 #include <queue>
@@ -15,4 +17,4 @@ int main()
   cout << suma % 100 + 1 << endl;
   return 0;
 }
-`
+```

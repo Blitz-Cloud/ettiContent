@@ -1,4 +1,25 @@
 
+```c
+
+#include <stdio.h>
+
+int main(void) {
+    int a[10]={1,2,3,4,5,6,7,8,9,10};
+    for(int i=0;i<10;i++) {
+        printf("%d ",*(a+i));
+    }
+    for(int i=0;i<10;i++) {
+        *(a+i)=*(a+i)+10;
+    }
+    printf("\n");
+    for(int i=0;i<10;i++) {
+        printf("%d ",*(a+i));
+    }
+    return 0;
+}
+
+```
+
 Acest cod C citește trei caractere de la intrare, le stochează într-un tablou și apoi le afișează în ordine inversă. Iată o explicație detaliată:
 
 **1. Include-uri:**
@@ -29,4 +50,49 @@ Acest cod C citește trei caractere de la intrare, le stochează într-un tablou
 
 **Exemplu de execuție:**
 
-`
+```
+a
+b
+c
+cba
+```
+
+În acest exemplu, utilizatorul a introdus caracterele 'a', 'b' și 'c', fiecare pe o linie separată. Programul a afișat apoi caracterele în ordine inversă: 'cba'.
+
+**Probleme și îmbunătățiri:**
+
+*   **Gestionarea caracterului newline:** Utilizarea `getchar()` pentru a consuma caracterul newline nu este o abordare robustă. Dacă utilizatorul introduce mai multe caractere pe o linie, `getchar()` va consuma doar primul caracter, iar restul vor rămâne în bufferul de intrare, ceea ce poate duce la comportament neașteptat. O abordare mai bună ar fi să se folosească `fgets` pentru a citi întreaga linie și apoi să se extragă caracterele dorite.
+*   **Dimensiunea tabloului:** Tabloul `a` are o dimensiune de 11, dar programul citește doar 3 caractere. Ar fi mai bine să se declare tabloul cu o dimensiune mai mică (e.g., 4) pentru a economisi memorie.
+*   **Lipsa validării intrării:** Programul nu validează intrarea utilizatorului. Dacă utilizatorul introduce mai puțin de 3 caractere, programul va avea un comportament imprevizibil. Ar trebui adăugată o validare a intrării pentru a asigura că programul funcționează corect.
+
+**Exemplu de cod îmbunătățit:**
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main(void) {
+    char a[4];
+    int i;
+
+    printf("Introduceti 3 caractere, fiecare pe o linie:\n");
+    for (i = 0; i < 3; i++) {
+        if (fgets(a + i, 2, stdin) == NULL) {
+            perror("Eroare la citirea caracterului");
+            return 1;
+        }
+        a[i] = a[i][0]; // Extrage primul caracter din linia citita
+    }
+    a[i] = '\0';
+
+    printf("Caracterele in ordine inversa: ");
+    for (i = 2; i >= 0; i--) {
+        printf("%c", a[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
+```
+
+Acest cod îmbunătățit folosește `fgets` pentru a citi caracterele și gestionează mai bine erorile de intrare.

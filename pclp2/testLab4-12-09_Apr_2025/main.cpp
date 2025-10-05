@@ -1,3 +1,5 @@
+
+```c
 #include <iostream>
 #include <cmath>
 
@@ -60,4 +62,4 @@ main()
 
   return 0;
 }
-`
+```

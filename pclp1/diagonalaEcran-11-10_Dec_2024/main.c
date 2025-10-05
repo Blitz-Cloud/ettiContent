@@ -1,3 +1,5 @@
+
+```c
 /*
  *  Description	: implementation of delay(), getch(), getche(), kbhit(), kbhit_wait(),
  *  		  GOTOXY(), CLRSCR(), rotr(), ...
@@ -246,4 +248,77 @@ int main(){
 
 
 
-`
+```
+
+Acest cod este o colecție de funcții utilitare pentru lucrul cu terminalul în C, împreună cu un program `main` care demonstrează utilizarea lor.  Scopul principal este de a oferi funcționalități similare cu cele găsite în biblioteci grafice simple (cum ar fi `conio.h` din Borland C++), dar care funcționează direct cu terminalul, fără a folosi o interfață grafică.
+
+**Structura generală:**
+
+1.  **Antet (Comentarii):** Descrie scopul codului, autorul și data.  Subliniază că funcțiile au fost testate pe terminale reale, nu pe console (ceea ce sugerează că ar putea avea probleme cu emulatoare de terminal mai simple).
+
+2.  **Include-uri:** Include fișierele antet standard necesare pentru funcțiile utilizate:
+    *   `<time.h>`: Pentru funcții legate de timp (e.g., `delay`, `srand`, `time`).
+    *   `<termios.h>`: Pentru controlul terminalului (e.g., dezactivarea ecoului, citirea caracterelor fără Enter).
+    *   `<fcntl.h>`: Pentru controlul fișierelor (e.g., setarea modului non-blocant pentru `kbhit`).
+    *   `<unistd.h>`: Pentru funcții POSIX (e.g., `usleep`, `system`, `dup`, `close`).
+    *   `<stdio.h>`: Pentru intrare/ieșire standard (e.g., `printf`, `getchar`, `getc`).
+    *   `<stdlib.h>`: Pentru funcții generale (e.g., `system`, `rand`, `srand`).
+    *   `<string.h>`: Pentru funcții de manipulare a șirurilor (e.g., `memcpy`).
+    *   `<errno.h>`: Pentru gestionarea erorilor.
+
+3.  **Definiri de Macro-uri (`#define`):**
+    *   `CLRSCR()`: Șterge ecranul terminalului folosind comanda `clear`.
+    *   `FG_BLACK`, `FG_RED`, ..., `FG_WHITE`: Definiri pentru culorile textului (foreground) folosind coduri escape ANSI.
+    *   `BG_BLACK`, `BG_RED`, ..., `BG_WHITE`: Definiri pentru culorile de fundal (background) folosind coduri escape ANSI.
+    *   `BGFG_RESET`: Resetează culorile la valorile implicite.
+    *   `GOTOXY(X, Y)`: Muta cursorul la coordonatele (X, Y) în terminal folosind coduri escape ANSI.  Reține că Y este prima coordonată în codul escape.
+    *   `DELLINE(X, Y)`: Șterge linia de la coordonatele (X, Y).
+
+4.  **Funcții:**
+
+    *   `myfflush()`:  O implementare personalizată a `fflush(stdin)`.  Folosește `dup`, `tcdrain`, `tcflush` și `close` pentru a asigura că bufferul de intrare este golit.  Este important de reținut că `fflush(stdin)` are un comportament nedefinit în standardul C, deci această implementare încearcă să ofere o alternativă mai sigură.
+
+    *   `mygetchar()`: Citește un caracter de la intrare, presupunând că terminalul este în modul "read-by-line".  Consumă caracterul newline (`\n`) după citirea caracterului dorit.
+
+    *   `getch()`: Citește un caracter fără ecou și fără a necesita apăsarea tastei Enter.  Modifică atributele terminalului folosind `termios` pentru a dezactiva `ICANON` (modul canonic, care necesită Enter) și `ECHO` (ecoul caracterelor).
+
+    *   `getche()`: Citește un caracter cu ecou, dar fără a necesita apăsarea tastei Enter.  Similar cu `getch`, dar dezactivează doar `ICANON`.
+
+    *   `getche2()`: O altă variantă de `getche`, care folosește comenzi `system` pentru a schimba modul terminalului.  Această abordare este mai puțin portabilă și mai puțin eficientă decât utilizarea `termios`.
+
+    *   `delay(long msec)`: Introduce o pauză de `msec` milisecunde.  Folosește `usleep` pentru întârzieri mai mici de 1 secundă și `nanosleep` pentru întârzieri mai mari.  Bucla `do...while` cu verificarea `errno == EINTR` este importantă pentru a gestiona situația în care semnalele întrerup funcția `nanosleep`.
+
+    *   `kbhit()`: Verifică dacă a fost apăsată o tastă fără a bloca execuția.  Modifică atributele terminalului pentru a dezactiva modul canonic și ecoul, și setează modul non-blocant pentru intrare.  Citește un caracter cu `getc`. Dacă s-a citit un caracter (diferit de `EOF`), îl pune înapoi în bufferul de intrare cu `ungetc` și returnează 1.  Altfel, returnează 0.  Include o mică întârziere de 150ms.
+
+    *   `kbhit_wait()`: Așteaptă până când este apăsată o tastă.  Folosește comenzi `system` pentru a schimba modul terminalului.  Această abordare este mai puțin portabilă și mai puțin eficientă decât utilizarea `termios`.
+
+    *   `rotr(unsigned int nr, unsigned int pos)`: Rotește un număr întreg fără semn `nr` la dreapta cu `pos` biți.
+
+    *   `rotl(unsigned int nr, unsigned int pos)`: Rotește un număr întreg fără semn `nr` la stânga cu `pos` biți.
+
+    *   `printb(unsigned int nr)`: Afișează reprezentarea binară a unui număr întreg fără semn.
+
+5.  **Funcția `main()`:**
+
+    *   Demonstrează utilizarea funcțiilor definite anterior.
+    *   Șterge ecranul.
+    *   Inițializează generatorul de numere aleatoare.
+    *   Afișează mesaje colorate folosind codurile escape ANSI.
+    *   Citește caractere cu și fără ecou folosind `getch` și `getche`.
+    *   Citește o parolă, ascunzând caracterele introduse cu asteriscuri.
+    *   Afișează reprezentarea binară a unui număr și a rotațiilor sale.
+    *   Așteaptă apăsarea unei taste folosind `kbhit` și `kbhit_wait`.
+    *   Înainte de a astepta apasarea unei taste, afiseaza un text la coordonatele (15,20)
+
+**În rezumat, codul oferă un set de funcții pentru a controla terminalul, a citi caractere de la tastatură (cu sau fără ecou, cu sau fără Enter), a introduce întârzieri, a detecta apăsări de taste și a manipula biți. Funcția `main` demonstrează utilizarea acestor funcții.**
+
+**Puncte de îmbunătățire:**
+
+*   **Portabilitate:** Utilizarea `system("/bin/stty ...")` face codul mai puțin portabil, deoarece depinde de existența comenzii `stty` și de locația ei.  Ar fi mai bine să se folosească doar `termios` pentru controlul terminalului.
+*   **Gestionarea erorilor:**  Ar trebui adăugată o gestionare mai robustă a erorilor (e.g., verificarea valorilor returnate de `tcgetattr`, `tcsetattr`, `fcntl`, `nanosleep`).
+*   **Securitate:**  Citirea parolei ar putea fi îmbunătățită pentru a evita scurgeri de informații în cazul în care programul este întrerupt brusc.
+*   **Claritate:**  Comentariile ar putea fi mai detaliate în unele locuri.
+*   **Consistență:**  Ar trebui aleasă o singură metodă pentru a goli bufferul de intrare (fie `myfflush`, fie o altă abordare).
+*   **`kbhit` delay:**  Întârzierea de 150ms din `kbhit` poate face ca detectarea apăsărilor de taste să fie mai lentă decât ar trebui.  Această întârziere ar trebui eliminată sau redusă.
+
+Deși codul funcționează, este important de reținut că manipularea directă a terminalului poate fi complexă și că există biblioteci mai moderne și mai portabile (cum ar fi `ncurses`) care oferă funcționalități similare.

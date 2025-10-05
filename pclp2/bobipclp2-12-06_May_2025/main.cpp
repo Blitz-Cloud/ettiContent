@@ -1,3 +1,5 @@
+
+```c
 /*<#include <iostream>
 
 using namespace std;
@@ -135,4 +137,4 @@ int main()
   c3.transforma_d_in_c(d3);
   cout << "Ariile d1,d2,d3,c1,c2,c3 sunt: " << d1.aria() << "," << d2.aria() << "," << d3.aria() << "," << c1.aria() << "," << c2.aria() << "," << c3.aria() << endl;
 }
-`
+```

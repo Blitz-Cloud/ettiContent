@@ -1,7 +1,8 @@
 ---
 title: O clasa pentru a usura afisarea de numere pe un ecran led 2x 8 segmente
 date: 2025-04-08T03:00:00+03:00
-subject: 
+subject: blog
+remote: local
 description: 'Clasele nu sunt terminate iar codul in linii mari este menit sa fie utilizat ca un model pentru o implementare proprie'
 tags: []
 uniYearAndSemester: 12

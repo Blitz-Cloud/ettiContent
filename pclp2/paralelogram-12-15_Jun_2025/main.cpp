@@ -1,3 +1,5 @@
+
+```c
 #include <iostream>
 
 using namespace std;
@@ -99,4 +101,4 @@ int main()
   cout << "aria patrat " << ptr.aria();
 }
 
-`
+```

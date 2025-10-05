@@ -1,7 +1,7 @@
 ---
-title: structHelp
+title: 'structHelp'
 date: 2025-02-05T02:00:00+02:00
-subject: pclp1
+subject: 'pclp1'
 description: 'Acest cod ilustrează structurile C, operatorul `sizeof` și cum dimensiunea lor este influențată de tipurile de date și de alinierea memoriei (padding), optimizând accesul la date.'
 tags: []
 uniYearAndSemester: 11
