@@ -1,5 +1,3 @@
-
-```c
 #include <iostream>
 #include <unistd.h>
 using namespace std;
@@ -60,4 +58,3 @@ int main()
   // delete num;
   return 0;
 }
-```

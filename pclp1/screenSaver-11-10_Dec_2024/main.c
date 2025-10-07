@@ -1,5 +1,3 @@
-
-```c
 /*
  *  Description	: implementation of delay(), getch(), getche(), kbhit(), kbhit_wait(),
  *  		  GOTOXY(), CLRSCR(), rotr(), ...
@@ -214,50 +212,3 @@ int main(){
 
 
 
-
-```
-
-Acest cod C face următorul lucru:
-
-1.  **Include fișierele antet necesare:**
-    *   `stdio.h`: Pentru funcții de intrare/ieșire standard, cum ar fi `printf`.
-    *   `stdlib.h`: Pentru funcții generale, inclusiv `div`.
-
-2.  **Definește funcția `main`:**
-    *   `int main(void)`: Funcția principală a programului, care nu primește argumente.
-
-3.  **Declară variabile:**
-    *   `int i`: O variabilă de tip întreg folosită ca contor în buclă.
-    *   `div_t x`: O variabilă de tip `div_t`.  `div_t` este un tip de structură definit în `stdlib.h` care este folosit pentru a stoca rezultatul funcției `div`.
-
-4.  **Bucla `for`:**
-    *   `for(i=11; i<20; i++)`: O buclă care iterează de la 11 la 19 (inclusiv).
-
-5.  **Funcția `div`:**
-    *   `x = div(i, 7)`:  Pentru fiecare valoare a lui `i`, funcția `div(i, 7)` calculează câtul și restul împărțirii lui `i` la 7.  Rezultatul este stocat în variabila `x` de tip `div_t`.
-
-6.  **Afișarea rezultatului:**
-    *   `printf("%d : %d,%d\n", i, x.quot, x.rem)`: Afișează valoarea lui `i`, câtul (`x.quot`) și restul (`x.rem`) împărțirii lui `i` la 7, separate prin două puncte și virgulă.  `\n` adaugă un caracter newline la sfârșitul fiecărei linii.
-
-7.  **Return 0:**
-    *   `return 0`: Indică faptul că programul s-a executat cu succes.
-
-**Ce face programul în esență:**
-
-Programul calculează și afișează câtul și restul împărțirii fiecărui număr întreg de la 11 la 19 la 7.
-
-**Exemplu de output:**
-
-```
-11 : 1,4
-12 : 1,5
-13 : 1,6
-14 : 2,0
-15 : 2,1
-16 : 2,2
-17 : 2,3
-18 : 2,4
-19 : 2,5
-```
-
-Fiecare linie din output reprezintă un număr `i`, urmat de câtul și restul împărțirii lui `i` la 7. De exemplu, pentru `i = 11`, câtul este 1 și restul este 4, deci linia afișată este `11 : 1,4`.

@@ -1,5 +1,3 @@
-
-```c
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
@@ -146,27 +144,3 @@ int main() {
     }
 }
 
-
-```
-
-Acest cod C este un program foarte simplu care afișează mesajul "Hello, World!" în consolă și apoi se termină. Iată o explicație detaliată:
-
-**1. Include-uri:**
-
-*   `#include <stdio.h>`: Include fișierul antet standard pentru intrare/ieșire, necesar pentru funcția `printf`.
-
-**2. Funcția `main()`:**
-
-*   `int main(void)`: Definește funcția principală a programului, care nu primește argumente.
-*   `printf("Hello, World!\n");`: Afișează șirul de caractere "Hello, World!" urmat de un caracter newline (`\n`) în consolă. Funcția `printf` este folosită pentru a formata și afișa date.
-*   `return 0;`: Returnează 0 pentru a indica faptul că programul s-a executat cu succes.
-
-**Ce face programul:**
-
-Programul afișează mesajul "Hello, World!" în consolă și apoi se termină. Acesta este un program clasic folosit adesea ca prim exemplu în introducerea unui limbaj de programare.
-
-**Ieșirea programului:**
-
-```
-Hello, World!
-```

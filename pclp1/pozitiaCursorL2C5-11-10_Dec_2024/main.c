@@ -1,5 +1,3 @@
-
-```c
 /*
  *  Description	: implementation of delay(), getch(), getche(), kbhit(), kbhit_wait(),
  *  		  GOTOXY(), CLRSCR(), rotr(), ...
@@ -214,54 +212,3 @@ int main(){
 
 
 
-
-```
-
-Acest cod C implementează o serie de funcții utilitare care sunt comune în programarea de consolă, dar nu sunt standard în toate mediile. Scopul principal pare a fi acela de a oferi funcționalități similare cu cele găsite în mediile DOS/Turbo C, cum ar fi `getch()`, `getche()`, `kbhit()`, `GOTOXY()`, `CLRSCR()`, etc., dar pentru un sistem Unix-like (presupunem Linux, având în vedere utilizarea `system("clear")` și `/bin/stty`).
-
-**Funcțiile implementate și ce fac ele:**
-
-*   **`delay(long msec)`:**  Implementează o funcție de întârziere (pauză) pentru un număr specificat de milisecunde. Folosește `usleep()` pentru întârzieri mai mici de 1 secundă și `nanosleep()` pentru întârzieri mai mari, gestionând și întreruperile (semnalul `EINTR`).
-*   **`getch(void)`:**  Citește un caracter de la tastatură fără a-l afișa pe ecran (fără ecou) și fără a aștepta apăsarea tastei Enter.  Modifică atributele terminalului folosind `termios` pentru a dezactiva modul canonic (line buffering) și ecoul.
-*   **`getche(void)`:**  Citește un caracter de la tastatură și îl afișează pe ecran (cu ecou) fără a aștepta apăsarea tastei Enter.  Similar cu `getch()`, dar lasă ecoul activat.
-*   **`getche2(void)`:** O altă implementare a `getche`, folosind comenzi `stty` pentru a modifica comportamentul terminalului.  Această abordare este mai puțin portabilă și mai puțin recomandată decât utilizarea `termios`.
-*   **`kbhit(void)`:**  Verifică dacă a fost apăsată o tastă fără a bloca execuția programului.  Modifică atributele terminalului pentru a dezactiva modul canonic și ecoul, și setează terminalul în mod non-blocant folosind `fcntl`.  Dacă un caracter este disponibil, îl pune înapoi în bufferul de intrare cu `ungetc()`.
-*   **`kbhit_wait(void)`:**  Așteaptă până când este apăsată o tastă.  Folosește `system("/bin/stty raw")` pentru a dezactiva buffering-ul și apoi apelează `getch()` într-o buclă.
-*   **`GOTOXY(X, Y)`:**  Mută cursorul la coordonatele specificate (X, Y) pe ecran.  Folosește secvențe de control ANSI escape pentru a realiza acest lucru.
-*   **`CLRSCR()`:**  Șterge ecranul consolei.  Folosește comanda `system("clear")`, care este specifică sistemelor Unix-like.
-*   **`rotr(unsigned int nr, unsigned int pos)`:**  Realizează o rotație la dreapta a unui număr întreg fără semn cu un număr specificat de poziții.
-*   **`rotl(unsigned int nr, unsigned int pos)`:**  Realizează o rotație la stânga a unui număr întreg fără semn cu un număr specificat de poziții.
-*   **`printb(unsigned int nr)`:**  Afișează reprezentarea binară a unui număr întreg fără semn.
-*   **`myfflush(void)`:**  Încearcă să golească bufferul de intrare standard.  Folosește `tcdrain` și `tcflush` pentru a asigura că toate datele sunt trimise și bufferul este golit.
-*   **`mygetchar(void)`:**  Citește un caracter de la intrarea standard.
-
-**Definiri de macro-uri:**
-
-*   **`FG_BLACK`, `FG_RED`, ..., `FG_WHITE`:**  Definesc secvențe de control ANSI escape pentru a seta culoarea textului (foreground).
-*   **`BG_BLACK`, `BG_RED`, ..., `BG_WHITE`:**  Definesc secvențe de control ANSI escape pentru a seta culoarea de fundal (background).
-*   **`BGFG_RESET`:**  Definește secvența de control ANSI escape pentru a reseta culorile la valorile implicite.
-*   **`DELLINE(X, Y)`:**  Șterge o linie de la coordonatele specificate.
-
-**Exemplu de utilizare (funcția `main()`):**
-
-Funcția `main()` demonstrează utilizarea funcțiilor definite:
-
-1.  Șterge ecranul (`CLRSCR()`).
-2.  Intră într-o buclă `while` care rulează până când este apăsată o tastă (`!kbhit()`).
-3.  În interiorul buclei:
-    *   Generează un număr aleatoriu.
-    *   Mută cursorul la o poziție aleatoare pe ecran (`GOTOXY()`).
-    *   Afișează textul "Windows" cu culoarea albastră (`FG_BLUE`) și resetează culorile (`BGFG_RESET`).
-    *   Așteaptă 200 de milisecunde (`delay()`).
-    *   Șterge ecranul (`CLRSCR()`).
-
-**Observații importante:**
-
-*   **Portabilitate:** Codul este dependent de sistemul de operare.  Utilizarea `system("clear")` și `system("/bin/stty ...")` îl face specific sistemelor Unix-like.  Pentru a-l face mai portabil, ar trebui să se folosească alternative standard POSIX sau să se includă cod condițional pentru diferite sisteme de operare.
-*   **Terminal real vs. Consolă:** Comentariul indică faptul că funcțiile au fost testate doar pe terminale reale, nu pe console.  Acest lucru sugerează că ar putea exista probleme cu emulatoarele de terminal sau cu consolele virtuale.
-*   **Codare ASCII:**  Codul menționează suport doar pentru codarea ASCII.  Acest lucru înseamnă că caracterele non-ASCII (cum ar fi cele din UTF-8) ar putea fi afișate incorect.
-*   **Securitate:** Utilizarea `system()` poate fi riscantă dacă intrarea nu este controlată cu atenție, deoarece permite execuția de comenzi shell arbitrare.  În acest caz, utilizarea `system("clear")` și `system("/bin/stty ...")` este relativ sigură, dar ar trebui evitată în general.
-*   **`termios`:** Utilizarea corectă a `termios` este crucială pentru a manipula atributele terminalului.  Este important să se salveze atributele originale și să se restaureze după utilizare pentru a evita efecte secundare nedorite.
-*   **`ungetc()`:**  Funcția `ungetc()` pune un caracter înapoi în bufferul de intrare.  Trebuie utilizată cu precauție, deoarece are o capacitate limitată (de obicei, doar un singur caracter).
-
-În concluzie, acest cod oferă o colecție de funcții utilitare pentru programarea de consolă, cu accent pe emularea funcționalităților DOS/Turbo C pe un sistem Unix-like.  Deși funcțional, ar putea beneficia de îmbunătățiri în ceea ce privește portabilitatea, securitatea și gestionarea erorilor.

@@ -1,5 +1,3 @@
-
-```c
 #include <iostream>
 #include <math.h>
 
@@ -36,4 +34,3 @@ main()
        << "Aria cercului " << cerc.aria() << endl;
   return 0;
 }
-```
