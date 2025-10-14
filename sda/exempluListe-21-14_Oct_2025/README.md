@@ -1,6 +1,6 @@
 ---
-title: Exemplu lista: Agenda
-date: 2025-10-07T20:36:33+03:00
+title: exempluListe
+date: 2025-10-14T18:29:43+03:00
 subject: sda
 description: 
 tags: []
