@@ -227,10 +227,10 @@ public:
   }
 };
 template <typename T>
-class StackMe : private LinkedList<T>
+class Stack : private LinkedList<T>
 {
 public:
-  StackMe() : LinkedList<T>::LinkedList()
+  Stack() : LinkedList<T>::LinkedList()
   {
   }
   void pushNode(T data)
@@ -242,6 +242,35 @@ public:
     LinkedList<T>::popFront();
   }
 
+  // misc
+  void getLength()
+  {
+    LinkedList<T>::getLength();
+  }
+  void isEmpty()
+  {
+    LinkedList<T>::isEmpty();
+  }
+  void display()
+  {
+    LinkedList<T>::display();
+  }
+};
+
+template <typename T>
+class Queue : private LinkedList<T>
+{
+public:
+  Queue() : LinkedList<T>::LinkedList() {}
+
+  void pushNode(T data)
+  {
+    LinkedList<T>::pushFront(data);
+  }
+  void popNode()
+  {
+    LinkedList<T>::popBack();
+  }
   // misc
   void getLength()
   {
@@ -322,11 +351,21 @@ int main()
   l1.clear();
   l1.display();
 
-  StackMe<int> stiva;
+  cout << "Exemplu de folosire si functionare pentru stiva" << endl;
+  Stack<int> stiva;
   stiva.pushNode(1);
   stiva.pushNode(2);
   stiva.pushNode(3);
   stiva.display();
   stiva.popNode();
   stiva.display();
+
+  cout << "Exemplu de folosire si functionare pentru coada" << endl;
+  Queue<int> coada;
+  coada.pushNode(1);
+  coada.pushNode(2);
+  coada.pushNode(3);
+  coada.display();
+  coada.popNode();
+  coada.display();
 }
