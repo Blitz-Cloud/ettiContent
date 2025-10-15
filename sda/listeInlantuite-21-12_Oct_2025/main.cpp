@@ -226,6 +226,36 @@ public:
     clear();
   }
 };
+template <typename T>
+class StackMe : private LinkedList<T>
+{
+public:
+  StackMe() : LinkedList<T>::LinkedList()
+  {
+  }
+  void pushNode(T data)
+  {
+    LinkedList<T>::pushFront(data);
+  }
+  void popNode()
+  {
+    LinkedList<T>::popFront();
+  }
+
+  // misc
+  void getLength()
+  {
+    LinkedList<T>::getLength();
+  }
+  void isEmpty()
+  {
+    LinkedList<T>::isEmpty();
+  }
+  void display()
+  {
+    LinkedList<T>::display();
+  }
+};
 
 int main()
 {
@@ -291,4 +321,12 @@ int main()
   cout << "Se elimina toate elementele din lista" << endl;
   l1.clear();
   l1.display();
+
+  StackMe<int> stiva;
+  stiva.pushNode(1);
+  stiva.pushNode(2);
+  stiva.pushNode(3);
+  stiva.display();
+  stiva.popNode();
+  stiva.display();
 }
