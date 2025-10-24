@@ -7,3 +7,9 @@ tags: []
 uniYearAndSemester: 21
 ---
 
+Ce vreau:
+1. Snapshot wokking
+2. .config replicabile (stew) 
+3. Waybar
+
+Cum functioneaza snapper ?? la ce face backup
