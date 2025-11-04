@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -43,11 +42,9 @@ char getTel(struct Lista *ListaPtr);
 
 void adaugaLaInceput(struct Lista *ListaPtr, Info InfoI)
 {
-
-    
     Inceput(ListaPtr);
     AdaugaDreapta(ListaPtr, InfoI);
-    PermDreapta(ListaPtr);
+    // PermDreapta(ListaPtr);
 }
 
 int c;
@@ -55,9 +52,10 @@ struct Lista *ListaTel;
 Info InfoPers;
 int Poz;
 
-char getTel(struct Lista *ListaPtr)
+char* getTel(struct Lista *ListaPtr)
 {
-    return *(ListaPtr->Curent->Date.Tel);
+    char *out = ListaPtr->Curent->Date.Tel;
+    return out;
 }
 
 void AfisareTel(struct Lista *ListaPtr, int ord)
@@ -360,7 +358,7 @@ int main(void)
             printf("Introduceti telefonul persoanei\n");
             scanf("%s", InfoI.Tel);
             printf("Introduceti numarul de ordine\n");
-            scanf("%d", InfoI.Ord);
+            scanf("%d", &InfoI.Ord);
             adaugaLaInceput(ListaTel, InfoI);
             break;
         default:
