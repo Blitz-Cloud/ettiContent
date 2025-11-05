@@ -1,5 +1,3 @@
-
-```c
 #include <iostream>
 #include <cstring>
 
@@ -44,4 +42,3 @@ int main()
   master.afisare();
   return 0;
 }
-```

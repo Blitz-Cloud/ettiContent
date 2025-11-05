@@ -1,5 +1,3 @@
-
-```c
 #include <iostream>
 #include <cmath>
 using namespace std;
@@ -45,4 +43,3 @@ int main()
   cout << "Pinul este gresit" << endl;
   return 0;
 }
-```

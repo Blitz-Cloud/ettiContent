@@ -1,5 +1,3 @@
-
-```c
 #include <iostream>
 using namespace std;
 
@@ -37,5 +35,3 @@ int main()
   cout << "aria: " << drept.aria() << endl;
   return 0;
 }
-
-```

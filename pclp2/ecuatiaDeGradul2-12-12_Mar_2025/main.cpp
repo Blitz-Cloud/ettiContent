@@ -1,5 +1,3 @@
-
-```c
 #include <iostream>
 #include <cmath>
 
@@ -55,4 +53,3 @@ int main()
   } while (opt != 'n');
   return 0;
 }
-```
